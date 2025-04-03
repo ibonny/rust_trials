@@ -31,9 +31,9 @@ async fn main() {
         .await
         .unwrap();
 
-    if let arr = res {
+    if let Some(arr) = res.as_array() {
         for obj in arr {
-            println!(obj)
+            println!("{:?}", obj["name"].as_str().expect("Not available."));
         }
     }
 }
