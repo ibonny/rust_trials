@@ -1,0 +1,5 @@
+/workspace/rust_trials/second_trial/target/debug/deps/libtry_lock-84cfbda6d083f094.rmeta: /workspace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/try-lock-0.2.5/src/lib.rs
+
+/workspace/rust_trials/second_trial/target/debug/deps/try_lock-84cfbda6d083f094.d: /workspace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/try-lock-0.2.5/src/lib.rs
+
+/workspace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/try-lock-0.2.5/src/lib.rs:

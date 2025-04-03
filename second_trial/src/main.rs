@@ -10,7 +10,8 @@ fn count_lines(input: &Vec<&str>) -> usize {
     return num;
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let file_path = "src/poem.txt".to_string();
 
     let contents = fs::read_to_string(file_path).expect("Should have been able to open the file.");
@@ -23,9 +24,16 @@ fn main() {
 
     println!("{:?}", count_lines(lines2));
 
-    let res = reqwest::blocking::get("https://jsonplaceholder.typicode.com/users")
-        .expect("blah")
-        .text();
+    let res = reqwest::get("https://jsonplaceholder.typicode.com/users")
+        .await
+        .unwrap()
+        .json::<serde_json::Value>()
+        .await
+        .unwrap();
 
-    println!("{:?}", res);
+    if let arr = res {
+        for obj in arr {
+            println!(obj)
+        }
+    }
 }
