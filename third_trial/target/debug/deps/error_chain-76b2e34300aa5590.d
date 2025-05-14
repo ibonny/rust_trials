@@ -1,9 +1,0 @@
-/workspaces/rust_trials/third_trial/target/debug/deps/liberror_chain-76b2e34300aa5590.rmeta: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/impl_error_chain_kind.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/error_chain.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/quick_main.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/example_generated.rs
-
-/workspaces/rust_trials/third_trial/target/debug/deps/error_chain-76b2e34300aa5590.d: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/impl_error_chain_kind.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/error_chain.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/quick_main.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/example_generated.rs
-
-/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/lib.rs:
-/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/impl_error_chain_kind.rs:
-/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/error_chain.rs:
-/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/quick_main.rs:
-/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/error-chain-0.11.0/src/example_generated.rs:
