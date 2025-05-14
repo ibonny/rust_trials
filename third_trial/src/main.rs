@@ -2,7 +2,7 @@ use std::{process, str::FromStr};
 
 use jsonpath::Selector;
 use reqwest;
-use serde_json::Value;
+use serde_json::{Error, Value};
 
 trait PassThrough<T, E> {
     fn pass_through(self, msg: &str) -> T;
@@ -33,7 +33,16 @@ async fn get_weather() -> Result<String, reqwest::Error> {
 }
 
 fn find_json<'a>(root: &'a Value, path: &'a str) -> &'a str {
-    let selector = Selector::new(path).unwrap();
+    let selector = Selector::new(path);
+
+    let selector = match selector {
+        Ok(val) => val,
+        Err(e) => {
+            println!("Unable to create new selector: {}", e);
+
+            process::exit(1);
+        }
+    };
 
     let mut iter = selector.find(root);
 
@@ -61,7 +70,16 @@ fn find_json<'a>(root: &'a Value, path: &'a str) -> &'a str {
 }
 
 fn find_num<'a, T: FromStr>(root: &'a Value, path: &'a str) -> T {
-    let selector = Selector::new(path).unwrap();
+    let selector = Selector::new(path);
+
+    let selector = match selector {
+        Ok(val) => val,
+        Err(e) => {
+            println!("Unable to create new selector: {}", e);
+
+            process::exit(1);
+        }
+    };
 
     let mut iter = selector.find(root);
 
@@ -106,14 +124,16 @@ fn find_num<'a, T: FromStr>(root: &'a Value, path: &'a str) -> T {
 async fn main() -> Result<(), reqwest::Error> {
     let weather = get_weather().await.pass_through("Unable to retrieve weather for location.");
 
-    let json_weather: Value = serde_json::from_str(weather.as_str()).unwrap();
-        // .unwrap_or_else(|e| {
-        //     println!("Cannot deserialize result: {}", e);
+    let json_weather: Result<Value, Error> = serde_json::from_str(weather.as_str());
 
-        //     process::exit(1);
-        // });
+    let json_weather = match json_weather {
+        Ok(v) => v,
+        Err(e) => {
+            println!("Unable to deserialize value: {}", e);
 
-    // println!("{}", json_weather);
+            process::exit(1);
+        }
+    };
 
     // for key in json_weather.as_object().unwrap().get("current").unwrap().as_object().unwrap() {
     //     println!("{:?}", key);
