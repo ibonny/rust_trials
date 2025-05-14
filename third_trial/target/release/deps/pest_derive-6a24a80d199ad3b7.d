@@ -1,0 +1,10 @@
+/workspaces/rust_trials/third_trial/target/release/deps/libpest_derive-6a24a80d199ad3b7.so: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/ast.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/generator.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/optimizer.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/parser.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/validator.rs
+
+/workspaces/rust_trials/third_trial/target/release/deps/pest_derive-6a24a80d199ad3b7.d: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/ast.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/generator.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/optimizer.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/parser.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/validator.rs
+
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/lib.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/ast.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/generator.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/optimizer.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/parser.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pest_derive-1.0.8/src/validator.rs:
