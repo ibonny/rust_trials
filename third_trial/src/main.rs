@@ -8,7 +8,14 @@ trait PassThrough<T, E> {
     fn pass_through(self, msg: &str) -> T;
 }
 
-impl<T, E> PassThrough<T, E> for Result<T, E> where E: std::fmt::Debug {
+trait PassThroughOption<T> {
+    fn pass_through(self, msg: &str) -> T;
+}
+
+impl<T, E> PassThrough<T, E> for Result<T, E>
+where
+    E: std::fmt::Debug,
+{
     fn pass_through(self, msg: &str) -> T {
         match self {
             Ok(value) => value,
@@ -21,13 +28,23 @@ impl<T, E> PassThrough<T, E> for Result<T, E> where E: std::fmt::Debug {
     }
 }
 
+impl<T> PassThroughOption<T> for Option<T> {
+    fn pass_through(self, msg: &str) -> T {
+        match self {
+            Some(value) => value,
+            None => {
+                println!("{}", msg);
+
+                process::exit(1);
+            }
+        }
+    }
+}
+
 async fn get_weather() -> Result<String, reqwest::Error> {
     let full_url = "http://api.weatherapi.com/v1/current.json?key=2af3e3b9db974c8bb66213204251405&q=Valrico&aqi=no";
 
-    let result = reqwest::get(full_url)
-        .await?
-        .text()
-        .await?;
+    let result = reqwest::get(full_url).await?.text().await?;
 
     Ok(result)
 }
@@ -46,25 +63,11 @@ fn find_json<'a>(root: &'a Value, path: &'a str) -> &'a str {
 
     let mut iter = selector.find(root);
 
-    let nth = iter.nth(0);
+    let nth = iter
+        .nth(0)
+        .pass_through(format!("No matches found: {}", path).as_str());
 
-    let nth = match nth {
-        Some(v) => v,
-        None => {
-            println!("No matches found: {}", path);
-
-            process::exit(0);
-        },
-    };
-
-    let val = match nth.as_str() {
-        Some(v) => v,
-        None => {
-            println!("Cannot decompose value: {}", path);
-
-            process::exit(0);
-        },
-    };
+    let val = nth.as_str().pass_through(format!("Cannot decompose value: {}", path).as_str());
 
     val
 }
@@ -85,29 +88,15 @@ fn find_num<'a, T: FromStr>(root: &'a Value, path: &'a str) -> T {
 
     let nth = iter.nth(0);
 
-    let nth = match nth {
-        Some(v) => v,
-        None => {
-            println!("No matches found: {}", path);
+    let nth = nth.pass_through(format!("No matches found: {}", path).as_str());
 
-            process::exit(0);
-        },
-    };
-
-    let ret_val = match nth.as_f64() {
-        Some(v) => v,
-        None => {
-            println!("Cannot decompose value: {}", path);
-
-            process::exit(0);
-        },
-    };
+    let ret_val = nth.as_f64().pass_through(format!("Cannot decompose value: {}", path).as_str());
 
     let new_val = format!("{}", ret_val);
 
     let new_val = match new_val.parse::<T>() {
         Ok(n) => Ok(n),
-        e => Err(e)
+        e => Err(e),
     };
 
     match new_val {
@@ -122,18 +111,13 @@ fn find_num<'a, T: FromStr>(root: &'a Value, path: &'a str) -> T {
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
-    let weather = get_weather().await.pass_through("Unable to retrieve weather for location.");
+    let weather = get_weather()
+        .await
+        .pass_through("Unable to retrieve weather for location.");
 
     let json_weather: Result<Value, Error> = serde_json::from_str(weather.as_str());
 
-    let json_weather = match json_weather {
-        Ok(v) => v,
-        Err(e) => {
-            println!("Unable to deserialize value: {}", e);
-
-            process::exit(1);
-        }
-    };
+    let json_weather = json_weather.pass_through("Unable to deserialize weather");
 
     // for key in json_weather.as_object().unwrap().get("current").unwrap().as_object().unwrap() {
     //     println!("{:?}", key);
@@ -157,8 +141,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
     println!("Local time: {}", local_time);
     println!("Last Updated: {}", last_updated);
-    println!("Wind (MPH): {:.1}", wind_mph);
-    println!("Wind Direction: {}", wind_dir);
+    println!("Wind (MPH): {:.1} from the {}", wind_mph, wind_dir);
     println!("Wind Gusts (MPH): {:.1}", gust_mph);
     println!("Temperature (F): {:.1}", temp_f);
     println!("WindChill (F): {:.1}", windchill_f);
