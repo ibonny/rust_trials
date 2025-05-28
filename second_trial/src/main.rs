@@ -1,5 +1,7 @@
 use std::fs;
 
+use pass_through_library::PassThrough;
+
 fn count_lines(input: &Vec<&str>) -> usize {
     let mut num: usize = 0;
 
@@ -26,10 +28,10 @@ async fn main() {
 
     let res = reqwest::get("https://jsonplaceholder.typicode.com/users")
         .await
-        .unwrap()
+        .pass_through("Cannot contact server")
         .json::<serde_json::Value>()
         .await
-        .unwrap();
+        .pass_through("Cannot derserialize value");
 
     if let Some(arr) = res.as_array() {
         for obj in arr {
